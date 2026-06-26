@@ -11,5 +11,10 @@ def display_menu():
     print("6. Exit")
     print("="*40)
     
-    choice = input("Enter your choice (1-6): ")
-    return choice
+    while True:
+        choice = input("Enter your choice (1-6): ")
+
+        if choice in ["1", "2", "3", "4", "5", "6"]:
+            return choice
+        else:
+            print("Invalid choice! Please enter a number from 1 to 6.")
