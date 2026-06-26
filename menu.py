@@ -18,3 +18,4 @@ def display_menu():
             return choice
         else:
             print("Invalid choice! Please enter a number from 1 to 6.")
+display_menu()
