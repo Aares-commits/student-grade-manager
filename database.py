@@ -10,9 +10,6 @@ def create_table():
     conn.commit()
     conn.close()
     print("Table ready!")
-
-if __name__ == "__main__":
-    create_table()
 def add_student():
     conn=connect()
     cursor=conn.cursor()
@@ -113,3 +110,6 @@ def delete_student():
         print("Deletion cancelled.")
 
     conn.close()
+
+if __name__ == "__main__":
+    create_table()
