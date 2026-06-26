@@ -89,9 +89,28 @@ def update_student():
     conn.commit()
     conn.close()
     print("Student updated successfully!")
+def delete_student():
+    conn = connect()
+    cursor = conn.cursor()
 
+    student_id = int(input("Enter student ID to delete: "))
+    cursor.execute("SELECT * FROM students WHERE id = ?", (student_id,))
+    student = cursor.fetchone()
 
+    if not student:
+        print("Student not found.")
+        conn.close()
+        return
 
+    print(f"Deleting student: {student[1]} (ID: {student[0]})")
+    confirm = input("Are you sure? (yes/no): ").lower()
 
-    
+    if confirm == "yes":
+        cursor.execute("DELETE FROM students WHERE id = ?", (student_id,))
+        conn.commit()
+        print("Student deleted successfully!")
+    else:
+        print("Deletion cancelled.")
+
+    conn.close()
     
