@@ -29,7 +29,6 @@ def view_students():
     conn=connect()
     cursor=conn.cursor()
     cursor.execute("SELECT * FROM students")
-    cursor.fetchall()
     students=cursor.fetchall()
     if not students:
         print("No students found.")
@@ -41,8 +40,26 @@ def view_students():
             print(f"Science: {student[3]}")
             print(f"English: {student[4]}")
             print("-" * 30)
-    conn.commit()
     conn.close()
     print("Students views succesfully")
+def search_student():
+    conn=connect()
+    cursor=conn.cursor()
+    student_id=int(input("Enter student ID to search: "))
+    cursor.execute("SELECT * FROM students where id = ?",(student_id,))
+    student=cursor.fetchone()
+    if student:
+        print(f"ID: {student[0]}")
+        print(f"Name: {student[1]}")
+        print(f"Math: {student[2]}")
+        print(f"Science: {student[3]}")
+        print(f"English: {student[4]}")
+    else:
+        print("Student not found")
+    
+    conn.close()
+
+
+
     
     
