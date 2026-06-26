@@ -41,7 +41,7 @@ def view_students():
             print(f"English: {student[4]}")
             print("-" * 30)
     conn.close()
-    print("Students views succesfully")
+    print("Students viewed succesfully")
 def search_student():
     conn=connect()
     cursor=conn.cursor()
@@ -58,6 +58,38 @@ def search_student():
         print("Student not found")
     
     conn.close()
+def update_student():
+    conn=connect()
+    cursor=conn.cursor()
+    student_id=int(input("Enter student ID to upadtE:"))
+    cursor.execute("SELECT * FROM students WHERE id = ?", (student_id,))
+    student=cursor.fetchone()
+    if not student:
+        print("Student not found.")
+        conn.close()
+        return 
+
+    print("Leave blank if you don't want to change")
+    new_name=input(f"Enter new name({student[1]}): ")
+    new_math = input(f"Enter new Math marks ({student[2]}): ")
+    new_science = input(f"Enter new Science marks ({student[3]}): ")
+    new_english = input(f"Enter new English marks ({student[4]}): ")
+    #keep old values if user presses enter
+    new_name = new_name if new_name else student[1]
+    new_math = int(new_math) if new_math else student[2]
+    new_science = int(new_science) if new_science else student[3]
+    new_english = int(new_english) if new_english else student[4]
+
+    cursor.execute(""" 
+                   UPDATE students
+                   SET name = ?, math = ?, science = ?, english = ?
+                   WHERE id = ?,
+                   """,(new_name, new_math, new_science, new_english, student_id))
+    
+    conn.commit()
+    conn.close()
+    print("Student updated successfully!")
+
 
 
 
