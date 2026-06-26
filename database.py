@@ -61,7 +61,7 @@ def search_student():
 def update_student():
     conn=connect()
     cursor=conn.cursor()
-    student_id=int(input("Enter student ID to upadtE:"))
+    student_id=int(input("Enter student ID to upadte:"))
     cursor.execute("SELECT * FROM students WHERE id = ?", (student_id,))
     student=cursor.fetchone()
     if not student:
@@ -83,7 +83,7 @@ def update_student():
     cursor.execute(""" 
                    UPDATE students
                    SET name = ?, math = ?, science = ?, english = ?
-                   WHERE id = ?,
+                   WHERE id = ?
                    """,(new_name, new_math, new_science, new_english, student_id))
     
     conn.commit()
@@ -113,4 +113,3 @@ def delete_student():
         print("Deletion cancelled.")
 
     conn.close()
-    
