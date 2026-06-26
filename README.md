@@ -4,7 +4,7 @@ A command-line app to manage student grades built with Python and SQLite.
 ## Features
 - Add students with marks
 - View all students
-- Calculate average and assign grades
+- Search and Update students
 - Delete students
 
 ## How to Run
