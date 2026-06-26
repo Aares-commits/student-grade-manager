@@ -11,5 +11,5 @@ def display_menu():
     print("6. Exit")
     print("="*40)
     
-    choice = input("Enter your choice (1-6): ")
+    choice = int(input("Enter your choice (1-6): "))
     return choice
